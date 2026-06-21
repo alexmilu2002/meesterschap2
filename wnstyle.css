@@ -80,8 +80,8 @@ html {
   background-color: #ffd93d;
   background-image: url('./images/gloeilampsvg2.svg');
   background-size: 55%;
-  width: clamp(75px, 12vw, 125px);
-  height: clamp(95px, 15vw, 150px);
+  width: clamp(100px, 12vw, 125px);
+  height: clamp(120px, 15vw, 150px);
 }
 
 /* Speaker overlay */

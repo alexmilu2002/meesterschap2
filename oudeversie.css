@@ -1,0 +1,250 @@
+/* Basis */
+*{
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+html{
+  --primary-color:#BDDDFC;
+  --secondary-color:#6A89A7;
+  --primary-font-color:#041121;
+  --buttons-color:#0B2647;
+  --lightbulb-color:#0B2647;
+}
+
+[data-theme="dark"]{
+  --primary-color:#041121;
+  --secondary-color:#6A89A7;
+  --primary-font-color:#f4f4f4;
+  --lightbulb-color:#ffd93d;
+}
+
+body{
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+header{
+  width: 100%;
+  margin-top: 2em;
+}
+
+h1{
+  font-size: clamp(25px, 5vw, 40px);
+  color: var(--primary-font-color);
+  text-align: center;
+}
+
+/* Cirkel */
+.cirkel{
+  width:300px;
+  aspect-ratio:1/1;
+  border: 1.5em solid var(--secondary-color);
+  border-radius: 100%;
+  background-color: var(--primary-color);
+
+  background-image: url(./images/motioniconsvg.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Buttons met Slinger */
+.buttonlist{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  padding: 0;
+  margin-top: -.5em;
+}
+
+
+.buttonlist div{
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+  background-image: radial-gradient(at 33% 33%, #fff, #6A89A7, #ffd93d);
+
+  display: flex;
+  justify-content: center;
+}
+
+.buttonlist > div:nth-of-type(1){
+  translate: 1em -3.5em;
+
+}
+
+.buttonlist > div:nth-of-type(2){
+  translate: 0 -1.5em;
+
+}
+
+.buttonlist > div:nth-of-type(4){
+  translate: 0 -1.5em;
+
+}
+
+.buttonlist > div:nth-of-type(5){
+  translate: -1em -3.5em;
+
+}
+
+.buttonlist div div{
+  translate: 0 1.1em;
+}
+
+.cirkel:hover ~ .buttonlist div div{
+  transform-origin: top center;
+  animation: --slinger-animation 2s infinite;
+}
+
+
+.cirkel:hover ~ .buttonlist >div:nth-of-type(1) div{
+  animation-duration: 2.3s;
+}
+.cirkel:hover ~ .buttonlist >div:nth-of-type(2) div{
+  animation-duration: 2.2s;
+}
+.cirkel:hover ~ .buttonlist >div:nth-of-type(3) div{
+  animation-duration: 1.9s;
+}
+.cirkel:hover ~ .buttonlist >div:nth-of-type(4) div{
+  animation-duration: 2.05s;
+}
+.cirkel:hover ~ .buttonlist >div:nth-of-type(5) div{
+  animation-duration: 1.95s;
+}
+
+@keyframes --slinger-animation{
+  0%   { rotate: 0deg;  animation-timing-function: ease-out; }
+  25%  { rotate: 3deg;  animation-timing-function: ease-in-out; }
+  75%  { rotate: -3deg; animation-timing-function: ease-in; }
+  100% { rotate: 0deg; }
+}
+
+/* Buttons */
+.buttonlist button{
+  flex-shrink: 0;
+  cursor: pointer;
+
+  background-color: var(--buttons-color);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  border: 3px solid var(--secondary-color);
+}
+
+.randomstudent{
+  width: clamp(75px, 12vw, 125px);
+  height: clamp(75px, 12vw, 125px);
+  border-radius: 100%;
+  background-image: url(./images/randomstudentsvg.svg);
+}
+
+.buttonprofile{
+  width: clamp(75px, 12vw, 125px);
+  height: clamp(75px, 12vw, 125px);
+  border-radius: 20px;
+  background-image: url(./images/karaktersvg.svg);
+}
+
+.buttongoals{
+  width:clamp(75px, 12vw, 125px);
+  height:clamp(125px, 15vw, 200px);
+  border-radius: 20px;
+  background-image: url(./images/doelensvg.svg);
+}
+
+.nieuweversie{
+  width: clamp(75px, 12vw, 125px);
+  height: clamp(75px, 12vw, 125px);
+  border-radius: 100%;
+  background-image: url(./images/new.png);
+}
+
+.themetoggle{
+  background-color: var(--lightbulb-color);
+  border-radius: 50%;
+  width:clamp(75px, 12vw, 125px);
+  height:clamp(95px, 15vw, 150px);
+  background-image: url(./images/gloeilampsvg2.svg);
+}
+
+/* Dialog */
+dialog{
+  width: clamp(300px, 60vw, 700px);
+  background-color: var(--secondary-color);
+  border-radius: 12px;
+  border: 3px solid var(--primary-font-color);
+  padding: 0;
+}
+
+dialog::backdrop{
+  background-color: #fff5;
+  backdrop-filter: blur(4px);
+}
+
+dialog form{
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+
+  grid-template-areas:
+    "titel"
+    "image"
+    "tekst"
+    "knop";
+}
+
+@media (width > 26em){
+  dialog form{
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    grid-template-areas:
+      "titel titel"
+      "image tekst"
+      "image tekst"
+      "niks knop";
+  }
+}
+
+dialog h2{
+  grid-area: titel;
+  margin: 0;
+  color: var(--primary-font-color);
+}
+
+dialog img{
+  grid-area: image;
+  width: clamp(270px, 60vw, 320px);
+  height: clamp(150px, 80vw, 360px);
+  object-fit: cover;
+  border: 3px solid var(--primary-font-color);
+  border-radius: 10px;
+}
+
+dialog form div{
+  grid-area: tekst;
+  color: var(--primary-font-color);
+}
+
+dialog form button{
+  grid-area: knop;
+  justify-self: end;
+
+  width: clamp(110px, 14vw, 160px);
+  height: clamp(44px, 5vw, 70px);
+
+  border: 3px solid var(--primary-font-color);
+  border-radius: 10px;
+
+  background-color: var(--buttons-color);
+  color: #f4f4f4;
+  cursor: pointer;
+  font-size: 1.05em;
+}

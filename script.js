@@ -1,50 +1,20 @@
+// Haal mijn eigen data op van de FDND API
 const apiURL = "https://fdnd.directus.app/items/person/279"
 
+// Handige hulpfunctie: als het een array is, zet er komma's tussen, anders gewoon de waarde teruggeven
 const fmt = (val) => Array.isArray(val) ? val.join(', ') : (val ?? "Niet Beschikbaar!");
 
-let apiData = null;
-let customField = null;
-
+// Meteen ophalen zodra de pagina laadt
 fetchJson(apiURL).then(function (response) {
   apiData = response.data;
-  customField = JSON.parse(response.data.custom);
+  customField = JSON.parse(response.data.custom); // mijn extra veldjes zitten in een JSON string
 });
 
-// Random student
-const apiURL2 = "https://fdnd.directus.app/items/person?filter[squads][squad_id][tribe][name]=CMD%20Minor%20Web%20Dev&filter[squads][squad_id][cohort]=2526";
+// Knoppen die de coin flip openen
 
-async function haalRandomMinormensOp() {
-  let response = await fetch(apiURL2);
-  let responseJSON = await response.json();
-  let responseData = responseJSON.data;
-
-  const student = responseData[Math.floor(Math.random() * responseData.length)];
-
-  return `
-    <img src="${student.avatar || './images/picturenotavailable.jpg'}" alt="Avatar van willekeurige student" class="neon-img">
-    <div class="profile-right">
-      <h2>${student.name ?? 'Willekeurige Student'}</h2>
-      <ul class="profile-list">
-        <li><span>Naam</span><span>${student.name ?? "Niet Beschikbaar!"}</span></li>
-        <li><span>Bijnaam</span><span>${student.nickname ?? "Niet Beschikbaar!"}</span></li>
-        <li><span>Geboortedatum</span><span>${student.birthdate ?? "Niet Beschikbaar!"}</span></li>
-        <li><span>Favoriete kleur</span><span>${student.fav_color ?? "Niet Beschikbaar!"}</span></li>
-        <li><span>Favoriete seizoen</span><span>${student.fav_season ?? "Niet Beschikbaar!"}</span></li>
-        <li><span>Favoriete dier</span><span>${student.fav_animal ?? "Niet Beschikbaar!"}</span></li>
-        <li><span>Favoriete hobby</span><span>${student.fav_hobby ?? "Niet Beschikbaar!"}</span></li>
-        <li><span>Favoriete fruit</span><span>${student.fav_fruit ?? "Niet Beschikbaar!"}</span></li>
-      </ul>
-    </div>
-  `;
-}
-
-// Click handlers
-document.querySelector('.buttonsprint0').addEventListener('click', function () {
-  flipOpen(this, haalRandomMinormensOp);
-});
-
+// Profiel knop, laat zien wie ik ben
 document.querySelector('.buttonprofile').addEventListener('click', function () {
-  if (!apiData) return;
+  if (!apiData) return; // nog niet geladen, even wachten
   flipOpen(this, `
     <img src="${apiData.avatar}" alt="Avatar van Alex" class="neon-img">
     <div class="profile-right">
@@ -62,6 +32,7 @@ document.querySelector('.buttonprofile').addEventListener('click', function () {
   `);
 });
 
+// Doelen knop, mijn drie leerdoelen
 document.querySelector('.buttongoals').addEventListener('click', function () {
   if (!customField) return;
   flipOpen(this, `
@@ -83,6 +54,7 @@ document.querySelector('.buttongoals').addEventListener('click', function () {
   `);
 });
 
+// Alle vakken knop, reflectie op het hele minor jaar met linkjes naar mijn repos
 document.querySelector('.buttonallevakken').addEventListener('click', function () {
   if (!customField) return;
   flipOpen(this, `
@@ -98,6 +70,7 @@ document.querySelector('.buttonallevakken').addEventListener('click', function (
   ]);
 });
 
+// Hackathon knop, ons Space Potatoes project
 document.querySelector('.buttonhackathon').addEventListener('click', function () {
   if (!customField) return;
   flipOpen(this, `
@@ -111,6 +84,7 @@ document.querySelector('.buttonhackathon').addEventListener('click', function ()
   ]);
 });
 
+// Meesterproef knop, het grote eindproject voor INK
 document.querySelector('.buttonmeesterproef').addEventListener('click', function () {
   if (!customField) return;
   flipOpen(this, `
