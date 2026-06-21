@@ -1,0 +1,133 @@
+html {
+  --primary-color: #0a1628;
+  --secondary-color: #2a3a52;
+  --primary-font-color: #f4f4f4;
+  --buttons-color: #1a2740;
+  --metal-light: #f0f4f8;
+  --metal-mid: #b8c4d0;
+  --metal-dark: #3a4a5c;
+}
+
+.cirkel {
+  background-color: var(--primary-color);
+}
+
+.buttonlist {
+  gap: 0.6rem;
+}
+
+/* Chain positions */
+.buttonlist > div:nth-of-type(1)  { translate: 0 -4.5em; }
+.buttonlist > div:nth-of-type(2)  { translate: 0 -2.8em; }
+.buttonlist > div:nth-of-type(3)  { translate: 0 -1.6em; }
+.buttonlist > div:nth-of-type(4)  { translate: 0 -0.7em; }
+.buttonlist > div:nth-of-type(5)  { translate: 0 -0.2em; }
+.buttonlist > div:nth-of-type(6)  { translate: 0 -0.2em; }
+.buttonlist > div:nth-of-type(7)  { translate: 0 -0.7em; }
+.buttonlist > div:nth-of-type(8)  { translate: 0 -1.6em; }
+.buttonlist > div:nth-of-type(9)  { translate: 0 -2.8em; }
+.buttonlist > div:nth-of-type(10) { translate: 0 -4.5em; }
+
+/* Swing durations */
+.cirkel:hover ~ .buttonlist > div:nth-of-type(1)  div { animation-duration: 2.2s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(2)  div { animation-duration: 1.9s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(3)  div { animation-duration: 2.05s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(4)  div { animation-duration: 1.95s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(5)  div { animation-duration: 2.1s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(6)  div { animation-duration: 2.15s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(7)  div { animation-duration: 2.0s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(8)  div { animation-duration: 1.85s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(9)  div { animation-duration: 2.25s; }
+.cirkel:hover ~ .buttonlist > div:nth-of-type(10) div { animation-duration: 1.95s; }
+
+/* Charms */
+.buttonlist button,
+.buttonlist a {
+  background-color: var(--secondary-color);
+  background-size: cover;
+  width: clamp(95px, 14vw, 130px);
+  height: clamp(95px, 14vw, 130px);
+  border-radius: 20px;
+}
+
+.speaker-killian   { background-image: url('./images/killian.jpg'); }
+.speaker-peterpaul { background-image: url('./images/peterpaul.jpg'); }
+.speaker-nils      { background-image: url('./images/nils.webp'); }
+.speaker-robbert   { background-image: url('./images/robbert.png'); }
+.speaker-rosa      { background-image: url('./images/rosa.png'); }
+.speaker-johan     { background-image: url('./images/johan.jpeg'); }
+.speaker-sanne      { background-image: url('./images/sanne.png'); }
+.speaker-q41        { background-image: url('./images/Q42.png'); }
+.speaker-voorhoedde { background-image: url('./images/Voorhoede.png'); }
+
+/* Tall charms */
+.buttonlist .speaker-peterpaul,
+.buttonlist .speaker-rosa,
+.buttonlist .speaker-q41 {
+  height: clamp(120px, 17vw, 165px);
+  border-radius: 16px;
+}
+
+/* Wide charms */
+.buttonlist .speaker-nils,
+.buttonlist .speaker-sanne {
+  width: clamp(120px, 17vw, 165px);
+  border-radius: 999px;
+}
+
+.buttonlist .backhome {
+  border-radius: 50%;
+  background-color: #ffd93d;
+  background-image: url('./images/gloeilampsvg2.svg');
+  background-size: 55%;
+  width: clamp(75px, 12vw, 125px);
+  height: clamp(95px, 15vw, 150px);
+}
+
+/* Speaker overlay */
+.fs-content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.speaker-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--metal-mid);
+}
+
+.speaker-header img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid var(--metal-mid);
+  animation: img-neon 5s ease-in-out infinite;
+}
+
+.speaker-header h2 {
+  margin: 0;
+  font-size: clamp(18px, 3vw, 32px);
+  color: var(--primary-font-color);
+}
+
+.speaker-tekst {
+  color: var(--primary-font-color);
+  line-height: 1.7;
+  overflow-y: auto;
+  max-height: 45vh;
+  padding-right: 0.5rem;
+}
+
+.speaker-tekst p {
+  margin: 0;
+}
+
+.speaker-tekst::-webkit-scrollbar       { width: 5px; }
+.speaker-tekst::-webkit-scrollbar-track { background: transparent; }
+.speaker-tekst::-webkit-scrollbar-thumb { background: var(--metal-mid); border-radius: 3px; }
+

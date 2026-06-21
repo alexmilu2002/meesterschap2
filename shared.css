@@ -1,0 +1,251 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+header {
+  width: 100%;
+  margin-top: 2em;
+}
+
+h1 {
+  font-size: clamp(25px, 5vw, 40px);
+  color: var(--primary-font-color);
+  text-align: center;
+}
+
+/* Grote ring */
+.cirkel {
+  width: 300px;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  background-position: center;
+  background-size: 55%;
+  background-repeat: no-repeat;
+  margin-bottom: 23px;
+  box-shadow:
+    0 0 0 3px  var(--metal-dark),
+    0 0 0 12px var(--metal-light),
+    0 0 0 18px var(--metal-mid),
+    0 0 0 22px var(--metal-dark),
+    0 0 0 23px var(--metal-light);
+}
+
+/* Ketting slinger */
+.buttonlist {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  margin-top: -.5em;
+}
+
+.buttonlist div {
+  width: 1.3em;
+  height: 1.8em;
+  border-radius: 50%;
+  background: transparent;
+  border: 4px solid var(--metal-mid);
+  box-shadow:
+    0 0 0 1px var(--metal-dark),
+    inset 0 0 0 1px var(--metal-dark);
+  display: flex;
+  justify-content: center;
+}
+
+.buttonlist div div {
+  translate: 0 1.5em;
+}
+
+.cirkel:hover ~ .buttonlist div div {
+  transform-origin: top center;
+  animation: --slinger-animation 2s infinite;
+}
+
+@keyframes --slinger-animation {
+  0%   { rotate: 0deg;  animation-timing-function: ease-out; }
+  25%  { rotate: 3deg;  animation-timing-function: ease-in-out; }
+  75%  { rotate: -3deg; animation-timing-function: ease-in; }
+  100% { rotate: 0deg; }
+}
+
+/* Buttons basis */
+.buttonlist button,
+.buttonlist a {
+  flex-shrink: 0;
+  cursor: pointer;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 3px solid var(--metal-mid);
+  box-shadow:
+    inset 0 0 0 1px var(--metal-dark),
+    0 0 0 1px var(--metal-dark);
+}
+
+/* Coin flip overlay */
+.fs-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  perspective: 1200px;
+}
+
+.fs-coin {
+  position: absolute;
+  transform-style: preserve-3d;
+  will-change: transform;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.fs-coin-front,
+.fs-coin-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+.fs-coin-back {
+  transform: rotateY(180deg);
+}
+
+.fs-content {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  overflow-y: auto;
+}
+
+.fs-content--visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.fs-content-inner {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 800px;
+  width: 100%;
+  color: var(--primary-font-color);
+
+  grid-template-areas:
+    "titel"
+    "image"
+    "tekst";
+}
+
+@media (width > 40em) {
+  .fs-content-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    grid-template-areas:
+      "titel titel"
+      "image tekst"
+      "image tekst";
+  }
+}
+
+.fs-content-inner h2 {
+  grid-area: titel;
+  margin: 0;
+  font-size: clamp(24px, 4vw, 42px);
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--primary-font-color);
+}
+
+.neon-img {
+  grid-area: image;
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid var(--metal-mid);
+  animation: img-neon 5s ease-in-out infinite;
+}
+
+
+@keyframes img-neon {
+  0%, 18%, 20%, 22%, 26%, 55%, 57%, 100% {
+    box-shadow:
+      0 0 0 1px var(--metal-dark),
+      0 0 8px #7ab8f5,
+      0 0 20px #4a90d9,
+      0 0 45px #2266bb;
+    opacity: 1;
+  }
+  19%, 21%, 56% {
+    box-shadow: 0 0 0 1px var(--metal-dark);
+    opacity: 0.7;
+  }
+}
+
+@keyframes h2-neon {
+  0%, 18%, 20%, 22%, 26%, 55%, 57%, 100% {
+    text-shadow:
+      0 0 4px rgba(255, 255, 255, 0.9),
+      0 0 12px #7ab8f5,
+      0 0 28px #4a90d9,
+      0 0 50px #2266bb;
+    opacity: 1;
+  }
+  19%, 21%, 56% {
+    text-shadow: none;
+    opacity: 0.6;
+  }
+}
+
+.fs-content-inner h2 {
+  animation: h2-neon 5s ease-in-out infinite;
+}
+
+.fs-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.fs-close {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: .6em 1.6em;
+  border: 3px solid var(--metal-mid);
+  border-radius: 10px;
+  background-color: var(--buttons-color);
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1em;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: inset 0 0 0 1px var(--metal-dark), 0 0 0 1px var(--metal-dark);
+}
+
+@media (max-width: 40em) {
+  .fs-close-label { display: none; }
+  .fs-close { padding: .6em 1em; }
+}
